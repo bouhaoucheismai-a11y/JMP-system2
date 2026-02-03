@@ -10,13 +10,17 @@ scope = [
     "https://www.googleapis.com/auth/drive"
 ]
 
+# استخدام Secret من Streamlit Cloud
 creds = Credentials.from_service_account_info(
     st.secrets["gcp_service_account"],
     scopes=scope
 )
 
 client = gspread.authorize(creds)
-sheet = client.open("JMP_SYSTEM").worksheet("JMP_DATA")
+
+# تحديث هنا: استخدم Sheet ID واسم الورقة الصحيح
+SHEET_ID = "1IHsOn4Wcm0yNRsFOlRZVcf6yb3oqHR-6ibDE3dNBeAU"
+sheet = client.open_by_key(SHEET_ID).worksheet("JMP_Database")
 
 # ---------- App ----------
 st.title("Journey Management Plan (JMP)")
